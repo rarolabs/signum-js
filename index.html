@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+  <title>browserify module</title>
+  <script src="bower_components/jquery/dist/jquery.js"></script> 
+  <script src="bower_components/minivents/dist/minivents.js"></script> 
+  <script src="bower_components/sockjs-client/dist/sockjs.js"></script>  
+  <script src="dist/signum.js"></script>
+</head>
+<body>
+  <a href="javascript:open('A3')">A3</a>
+  <a href="javascript:open('A1')">A1</a>
+  <input type="file"><br>
+  <table id="certificados" border="1">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>CPF/CNPJ</th>
+        <th>Validade</th>
+        <th>Assinar</th>        
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</body>
+
+</html>
+
+  <script>
+
+  
+  var s = new signum();
+  var certificados;
+  var mostrarCeritifcados = function(obj){
+    certificados = obj.response_object;
+
+    Object.keys(certificados).forEach(function(k){
+      var certificado = obj.response_object[k];
+      var data = certificado.certificate.afterDate;
+      var nome = certificado.certificate.nome;
+      var alias = certificado.alias;
+      var cpf = certificado.certificate.cpf || certificado.certificate.cnpj;
+      $('#certificados tbody').append('<tr><td><a href="javascript:login(\''+alias+'\')">' + nome+ '</a></td><td>' + cpf + '</td><td>' + data + '</td><td><a href="javascript:assinar(\''+alias+'\')">ok</a></td></tr>');
+    })
+ }
+ 
+ function open(type){
+   alert(type);
+   s.open('http://localhost:7276','F7mx9AnPcgxm/T8eWUepRRVNPaRTYEBozwj15dZquyDGqyxP6gt1ivlModSOamwVUJ4sWPrKOL23wnqsEZN1I3dkP/3KJaY4k0b493BTZmXo+VkB07WAdl589AX6hhDNKBAwrhkudWOpgWls5mGD/lF/Yxf6Ab8i6tJDzpLLly0mmOa4Ns0ApcIhZQNcm6I2ZbwFX6eL0hDUSRX7VFBe2uy+zAXuE26YzC2pVRFfL1b7sbO5Q+TCisnmlVI/Rb36fgHVMGJZ2+BoVAgTVVh7pIPPDiY6wa98JSo8BNMKlaAlip83/uWr3sn7TSA2CP6oclMGI+Ttv3G9mIe5U+ztQg==', function(){
+        if(type == 'A3'){
+          s.list(function(){s.setPin(prompt('PIN'))},mostrarCeritifcados)
+        }else{
+
+            var file    = document.querySelector('input[type=file]').files[0];
+            var reader  = new FileReader();
+            reader.onload = function(e) {
+              console.log(e.target.result)
+              s.load_a1(e.target.result.replace(/(.{77})/g, "$1\r\n"),prompt("PIN"),mostrarCeritifcados)
+            }
+            reader.onerror = function(stuff) {
+              console.log("error", stuff)
+              console.log (stuff.getMessage())
+            }
+            if (file) {
+              reader.readAsDataURL(file)
+            }
+        }
+    },function(error){
+      console.log(error);
+    });
+  }
+  
+  function login(alias){
+    $.ajax({
+      type: "POST",
+      url: 'http://localhost:3000/api/token',
+      data: {publicKey: certificados[alias].publicKey},
+      success: function(data){
+          console.log("Token Gerado")
+          console.log(data)
+          s.login(alias,data.token,function(result){
+            //Verificar no servidor se a resposta eh valida;
+          });
+      }
+    });
+  };
+
+  function assinar(alias){
+    s.sign(alias,'AA','teste','1',function(result){
+      console.log(result);
+    })
+  };
+  
+  
+
+  </script>

@@ -1,0 +1,29 @@
+{
+  "name": "signum",
+  "main": "index.js",
+  "authors": [
+    "Rodrigo Sol <rodrigosol@gmail.com>"
+  ],
+  "description": "Biblioteca para acesso a certificados digitais ICP Brasil",
+  "moduleType": [],
+  "keywords": [
+    "cetificacao",
+    "digital",
+    "assinatura",
+    "icpbrasil",
+    "a1",
+    "a3"
+  ],
+  "license": "MIT",
+  "homepage": "http://signum.rarolabs.com.br",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "minivents": "~2.0.1"
+  }
+}

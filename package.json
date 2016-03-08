@@ -1,0 +1,32 @@
+{
+  "name": "signum",
+  "version": "1.0.0",
+  "description": "Biblioteca para acesso a certificados digitais no padrão ICP Brasil",
+  "main": "signum.js",
+  "scripts": {
+    "build-debug": "browserify src/index.js -d --s signum > dist/signum.js",
+    "build-min": "browserify src/index.js --s signum | uglifyjs -c > dist/signum.min.js",
+    "build": "npm run build-debug && npm run build-min",
+    "watch": "watchify src/index.js -d --s signum -o dist/signum.js -v",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "certificao",
+    "digital",
+    "assinatura",
+    "icpbrasil"
+  ],
+  "author": "Rodrigo Sol",
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "^13.0.0",
+    "gulp": "^3.9.1",
+    "gulp-browserify": "^0.5.1",
+    "gulp-serve": "^1.2.0",
+    "uglify-js": "^2.6.2",
+    "watchify": "^3.7.0"
+  },
+  "dependencies": {
+    "minivents": "^2.0.1"
+  }
+}
