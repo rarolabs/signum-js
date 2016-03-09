@@ -23,6 +23,9 @@ var Signum = new function() {
           console.log(data)          
           self.sessionId = data.response_object.id;
           self.openSocket(url,callback,errorCallback);
+        },
+        error: function () {
+          errorCallback({error_code:1,error_mensagem: 'Nao foi possivel estabelecer conexao com signum'})
         }
       });
     }

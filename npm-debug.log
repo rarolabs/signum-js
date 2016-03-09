@@ -3,32 +3,43 @@
 2 info using npm@3.5.1
 3 info using node@v0.12.7
 4 verbose node symlink /usr/local/bin/node
-5 verbose stack Error: Failed to parse json
-5 verbose stack Trailing comma in object at 31:3
-5 verbose stack   }
-5 verbose stack   ^
-5 verbose stack     at parseError (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:379:11)
-5 verbose stack     at parseJson (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:68:23)
-5 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:48:5
-5 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:76:16
-5 verbose stack     at fs.js:334:14
-5 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:42:10
-5 verbose stack     at FSReqWrap.oncomplete (fs.js:95:15)
-6 verbose cwd /Users/rodrigosol/raro/certificado_agent/js
-7 error Darwin 15.0.0
-8 error argv "node" "/usr/local/bin/npm" "run" "watch"
-9 error node v0.12.7
-10 error npm  v3.5.1
-11 error file /Users/rodrigosol/raro/certificado_agent/js/package.json
-12 error code EJSONPARSE
-13 error Failed to parse json
-13 error Trailing comma in object at 31:3
-13 error   }
-13 error   ^
-14 error File: /Users/rodrigosol/raro/certificado_agent/js/package.json
-15 error Failed to parse package.json data.
-15 error package.json must be actual JSON, not just JavaScript.
-15 error
-15 error This is not a bug in npm.
-15 error Tell the package author to fix their package.json file. JSON.parse
-16 verbose exit [ 1, true ]
+5 verbose run-script [ 'prewatch', 'watch', 'postwatch' ]
+6 info lifecycle signum@1.0.0~prewatch: signum@1.0.0
+7 silly lifecycle signum@1.0.0~prewatch: no script for prewatch, continuing
+8 info lifecycle signum@1.0.0~watch: signum@1.0.0
+9 verbose lifecycle signum@1.0.0~watch: unsafe-perm in lifecycle true
+10 verbose lifecycle signum@1.0.0~watch: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/rodrigosol/raro/signum-js/node_modules/.bin:/Users/rodrigosol/google-cloud-sdk/bin:/Users/rodrigosol/.rvm/gems/ruby-2.1.2/bin:/Users/rodrigosol/.rvm/gems/ruby-2.1.2@global/bin:/Users/rodrigosol/.rvm/rubies/ruby-2.1.2/bin:/usr/local/apache-maven/bin:/opt/local/bin:/opt/local/sbin:/usr/local/git/bin/:/usr/local/bin:/usr/local/mysql/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Developer/android_sdk_darwin_m3-rc20a/tools:/Users/rodrigosol/opt/llvm/Debug/bin:/Users/rodrigosol/opt/llvm-gcc4.2-2.5-x86-darwin9/bin:/Users/rodrigosol/opt/llvm/utils:/Users/rodrigosol/.rvm/bin:/Users/rodrigosol/.ec2/bin:/usr/local/mysql/bin
+11 verbose lifecycle signum@1.0.0~watch: CWD: /Users/rodrigosol/raro/signum-js
+12 silly lifecycle signum@1.0.0~watch: Args: [ '-c',
+12 silly lifecycle   'watchify src/index.js -d --s signum -o dist/signum.js -v' ]
+13 silly lifecycle signum@1.0.0~watch: Returned: code: 1  signal: null
+14 info lifecycle signum@1.0.0~watch: Failed to exec watch script
+15 verbose stack Error: signum@1.0.0 watch: `watchify src/index.js -d --s signum -o dist/signum.js -v`
+15 verbose stack Exit status 1
+15 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:232:16)
+15 verbose stack     at EventEmitter.emit (events.js:110:17)
+15 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:24:14)
+15 verbose stack     at ChildProcess.emit (events.js:110:17)
+15 verbose stack     at maybeClose (child_process.js:1015:16)
+15 verbose stack     at Process.ChildProcess._handle.onexit (child_process.js:1087:5)
+16 verbose pkgid signum@1.0.0
+17 verbose cwd /Users/rodrigosol/raro/signum-js
+18 error Darwin 15.0.0
+19 error argv "node" "/usr/local/bin/npm" "run" "watch"
+20 error node v0.12.7
+21 error npm  v3.5.1
+22 error code ELIFECYCLE
+23 error signum@1.0.0 watch: `watchify src/index.js -d --s signum -o dist/signum.js -v`
+23 error Exit status 1
+24 error Failed at the signum@1.0.0 watch script 'watchify src/index.js -d --s signum -o dist/signum.js -v'.
+24 error Make sure you have the latest version of node.js and npm installed.
+24 error If you do, this is most likely a problem with the signum package,
+24 error not with npm itself.
+24 error Tell the author that this fails on your system:
+24 error     watchify src/index.js -d --s signum -o dist/signum.js -v
+24 error You can get information on how to open an issue for this project with:
+24 error     npm bugs signum
+24 error Or if that isn't available, you can get their info via:
+24 error     npm owner ls signum
+24 error There is likely additional logging output above.
+25 verbose exit [ 1, true ]
