@@ -1,6 +1,6 @@
 {
   "name": "signum",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Biblioteca para acesso a certificados digitais no padrão ICP Brasil",
   "main": "signum.js",
   "scripts": {
