@@ -1,10 +1,6 @@
-console.log(new Events());
-
 module.exports = function(){
   return Signum;
 }
-
-
 
 var Signum = new function() {
     this.ws = undefined;
@@ -19,8 +15,6 @@ var Signum = new function() {
         url: url + '/session/new',
         data: {licenceKey: licenceKey},
         success: function(data){
-          console.log("Sessao criada")
-          console.log(data)          
           self.sessionId = data.response_object.id;
           self.openSocket(url,callback,errorCallback);
         },
@@ -41,7 +35,6 @@ var Signum = new function() {
       };
       
       this.ws.onmessage = function(e) {
-        console.log("Mensagem recebida:" + e.data)
         self.events.emit("signum_onmessage",e.data);
         
         var msg = JSON.parse(e.data);
@@ -57,6 +50,8 @@ var Signum = new function() {
             self.events.emit("signum_list_in_processing",msg);
         }else if(msg.response_id == 'login_ok'){
             self.events.emit("signum_login_ok",msg);
+        } else if (msg.response_id == 'sign_ok') {
+            self.events.emit("signum_sign_ok", msg);
         }else if(msg.response_id == 'pin_requested'){
           self.events.emit("signum_pin_requested",msg);
         }else if(msg.response_id == 'error'){
@@ -71,7 +66,6 @@ var Signum = new function() {
       };    
     
     };
-    
     
     this.new_session = function(callback){
       self.ws.send('{"message_id":"new_session","session_id":"'+ self.sessionId +'"}');
@@ -108,13 +102,8 @@ var Signum = new function() {
     }
 
     this.sign = function(alias,content,contentName,contentId,callback){
-      self.events.on("sign_ok",callback);
+      self.events.on("signum_sign_ok",callback);
       self.ws.send('{"message_id":"sign","session_id":"'+ self.sessionId +'","alias":"' + alias + '","content":"'+ content +'","content_name":"'+ contentName +'","content_id":"'+ contentId +'"}');
     }
 
-
 }
-
-
-
-
