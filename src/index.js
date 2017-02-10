@@ -52,6 +52,8 @@ var Signum = new function() {
             self.events.emit("signum_login_ok",msg);
         } else if (msg.response_id == 'sign_ok') {
             self.events.emit("signum_sign_ok", msg);
+        } else if (msg.response_id == 'sign_xml_ok') {
+            self.events.emit("signum_sign_xml_ok", msg);
         }else if(msg.response_id == 'pin_requested'){
           self.events.emit("signum_pin_requested",msg);
         }else if(msg.response_id == 'error'){
@@ -104,6 +106,11 @@ var Signum = new function() {
     this.sign = function(alias,content,contentName,contentId,callback){
       self.events.on("signum_sign_ok",callback);
       self.ws.send('{"message_id":"sign","session_id":"'+ self.sessionId +'","alias":"' + alias + '","content":"'+ content +'","content_name":"'+ contentName +'","content_id":"'+ contentId +'"}');
+    }
+    
+    this.sign_xml = function(alias,content,contentName,contentId,callback){
+      self.events.on("signum_sign_xml_ok",callback);
+      self.ws.send('{"message_id":"sign_xml","session_id":"'+ self.sessionId +'","alias":"' + alias + '","content":"'+ content +'","content_name":"'+ contentName +'","content_id":"'+ contentId +'"}');
     }
 
 }
